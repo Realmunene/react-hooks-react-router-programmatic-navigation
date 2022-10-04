@@ -17,6 +17,18 @@ function Login({ setIsLoggedIn }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    fetch("http://localhost:3001/login", {
+      method : "POST",
+      headers:{
+        "content-Type":"application/json",
+      },
+      body:JSON.stringify(formData),
+    })
+    .then((r)=>r.json())
+    .then((user)=> {
+      onLogin(user);
+      history.push("/home");
+    });
 
     setIsLoggedIn(true);
 
